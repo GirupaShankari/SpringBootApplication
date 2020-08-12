@@ -109,24 +109,29 @@ public class StudentController {
     public boolean addStudent(Student student)
     {
         List<Student> studentList=prepareData();
-        int count=0;
+      //  int count=0;
         boolean newStudent=false;
-        Iterator<Student> iterator=studentList.iterator();
-        while(iterator.hasNext())
-        {
-            Student s= iterator.next();
-            if(student.getId()==(s.getId()))
-            {
-                count++;
-                break;
-            }
-        }
-        if(count==0) {
-            studentList.add(student);
-            newStudent=true;
-        }
+//        Iterator<Student> iterator=studentList.iterator();
+//        while(iterator.hasNext())
+//        {
+//            Student s= iterator.next();
+//            if(student.getId()==(s.getId()))
+//            {
+//                count++;
+//                break;
+//            }
+//        }
+//        if(count==0) {
+//            studentList.add(student);
+//            newStudent=true;
+//        }
 
-       return newStudent;
+        //Using Stream
+        if(studentList.stream().filter(i->i.getId()==student.getId()).count()!=0) return false;
+        studentList.add(student);
+        return true;
+
+      // return newStudent;
 
     }
 
